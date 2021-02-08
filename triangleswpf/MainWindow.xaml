@@ -5,35 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:triangleswpf"
         mc:Ignorable="d"
-        Title="Triangles" Height="450" Width="500">
+        Title="Triangles"
+        Icon="pack://application:,,,./assets/tricon.ico"
+        Height="550" Width="500">
     <Grid Background="#202020">
         <Border Margin="25 10" Padding="10" BorderBrush="#eee" BorderThickness="1">
-        <StackPanel>
+            <StackPanel>
+                <Viewbox>
+                    <Image Source="{StaticResource logo}"></Image>
+                </Viewbox>
                 <TextBlock Text="TRIANGLE INFORMATION" FontWeight="Bold" Margin="0 10 0 20" Foreground="#eee" FontSize="16" FontFamily="Verdana"/>
-            <TextBlock Text="Inputs" FontWeight="DemiBold" Foreground="#eee" Padding="10 0" FontSize="14"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="0.7*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
+                <TextBlock Text="Inputs" FontWeight="DemiBold" Foreground="#eee" Padding="10 0" FontSize="14"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 15" FontSize="14" Text="Side A length (m):" Foreground="#eee"/>
-                <TextBox x:Name="LengthA" TextChanged="LengthA_Handler" Grid.Column="1" Grid.Row="0" Margin="0 10" Padding="2 5" />
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 15" FontSize="14" Text="Side B length (m):" Foreground="#eee"/>
-                <TextBox x:Name="LengthB" TextChanged="LengthB_Handler" Grid.Column="1" Grid.Row="1" Margin="0 10" Padding="2 5"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 15" FontSize="14" Text="Side C length (m):" Foreground="#eee"/>
-                <TextBox x:Name="LengthC" TextChanged="LengthC_Handler" Grid.Column="1" Grid.Row="2" Margin="0 10" Padding="2 5"/>
-            </Grid>
-            <Separator Margin="10 0" />
-            <TextBlock Text="Result" FontWeight="DemiBold" Foreground="#eee" Padding="10 10 10 0" FontSize="14"/>
-            <TextBlock x:Name="RealResult" Margin="0 15" FontSize="14" Text="Enter triangle sides above." Foreground="#eee"/>
-        </StackPanel>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 15" FontSize="14" Text="Side A length (m):" Foreground="#eee"/>
+                    <TextBox x:Name="LengthA" TextChanged="LengthA_Handler" Grid.Column="1" Grid.Row="0" Margin="0 10" Padding="2 5" />
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 15" FontSize="14" Text="Side B length (m):" Foreground="#eee"/>
+                    <TextBox x:Name="LengthB" TextChanged="LengthB_Handler" Grid.Column="1" Grid.Row="1" Margin="0 10" Padding="2 5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 15" FontSize="14" Text="Side C length (m):" Foreground="#eee"/>
+                    <TextBox x:Name="LengthC" TextChanged="LengthC_Handler" Grid.Column="1" Grid.Row="2" Margin="0 10" Padding="2 5"/>
+                </Grid>
+                <Separator Margin="10 10 0 0" />
+                <TextBlock Text="Result" FontWeight="DemiBold" Foreground="#eee" Padding="10 10 10 0" FontSize="14"/>
+                <TextBlock x:Name="RealResult" Margin="0 15" FontSize="14" Text="Enter triangle sides above." Foreground="#eee"/>
+            </StackPanel>
     </Border>
     </Grid>
 

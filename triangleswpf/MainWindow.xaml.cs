@@ -88,11 +88,11 @@ namespace triangleswpf
 
                 if (checkTheorem(squaredA, squaredB, squaredC))
                 {
-                    RealResult.Text = "These side lengths produce a valid right angle triangle.";
+                    RealResult.Text = "These side lengths produce a valid right angle triangle";
                 }
                 else
                 {
-                    RealResult.Text = "Non-valid";
+                    RealResult.Text = "Invalid right angle triangle";
                 }
             }
             

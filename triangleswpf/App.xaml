@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:triangleswpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <BitmapImage x:Key="logo" UriSource="assets/trilogo.png"></BitmapImage>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
