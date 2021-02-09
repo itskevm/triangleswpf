@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,21 @@ namespace triangleswpf
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        // Implements a "select-all" feature when changing textboxes via "Tab" key
+        private void GotKeyboardFocus_Handler(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (e.KeyboardDevice.IsKeyDown(Key.Tab))
+            {
+                ((TextBox)sender).SelectAll();
+            }
+        }
+
+        // Allow only for numbers to be added
+        private void PreviewTextInput_Handler(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^\\d\\.]").IsMatch(e.Text);
         }
 
         // Attempting to cast the user's entries into numerical values (returning 0 assumes invalid entry)
