@@ -20,13 +20,14 @@ namespace triangleswpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private bool validA, validB, validC = false;
-        private float valueA, valueB, valueC = 0;
+        private bool modifiedA, modifiedB, modifiedC = false; // make textboxes act "untouched" until told otherwise
+        private float valueA, valueB, valueC = 0; // filled later by only valid numerical entries
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        // Attempting to cast the user's entries into numerical values (returning 0 assumes invalid entry)
         private float castStringToValue(string entry)
         {
             bool valid = false;
@@ -39,32 +40,43 @@ namespace triangleswpf
             return 0;
         }
 
+        // This will execute each time the user types in any of the three entries (shared by 3 textboxes)
         private void TextChange_Handler(object sender, TextChangedEventArgs e)
         {
-            valueA = castStringToValue(LengthA.Text);
-            valueB = castStringToValue(LengthB.Text);
-            valueC = castStringToValue(LengthC.Text);
-
-            Console.WriteLine("A: "+valueA);
-            Console.WriteLine("B: "+valueB);
-            Console.WriteLine("C: "+valueC);
-
-            if (valueA > 0 && valueB > 0 && valueC > 0)
+            // Determine if these are initial entries
+            if (!LengthA.Text.Equals(""))
             {
-                Console.WriteLine("all valid numbers");
-                generateResult(valueA, valueB, valueC);
-                //ResultSign
+                modifiedA = true;
             }
-            else
+            if (!LengthB.Text.Equals(""))
             {
-                generateResult(0, 0, 0);
-                RealResult.Text = "Verify inputs";
-                Console.WriteLine("Input Error");
-                ResultSign.Source = new BitmapImage(new Uri(@"/assets/warningsign.png", UriKind.Relative));
+                modifiedB = true;
             }
-            //might want to validate here if the value is numeric and positive
-            //LengthA.Text = "";
+            if (!LengthC.Text.Equals(""))
+            {
+                modifiedC = true;
+            }
+
+            if (modifiedA && modifiedB && modifiedC)
+            {
+                valueA = castStringToValue(LengthA.Text);
+                valueB = castStringToValue(LengthB.Text);
+                valueC = castStringToValue(LengthC.Text);
+
+                if (valueA > 0 && valueB > 0 && valueC > 0)
+                {
+                    generateResult(valueA, valueB, valueC);
+                }
+                else
+                {
+                    generateResult(0, 0, 0);
+                    RealResult.Text = "Fill all entries with numbers";
+                    ResultSign.Source = new BitmapImage(new Uri(@"/assets/warningsign.png", UriKind.Relative));
+                }
+            }
         }
+
+        // The following functions contain the logic for what qualifies a triangle to be each type
         private bool IsValidTriangle(float a, float b, float c)
         {
             if ((a + b > c) && (b + c > a) & (a + c > b))
@@ -74,7 +86,6 @@ namespace triangleswpf
 
             return false;
         }
-
         public bool IsRightAngleTriangle(float a, float b, float c)
         {
             double [] asq = new double[3] { Math.Pow(a, 2), Math.Pow(b, 2), Math.Pow(c, 2) };
@@ -100,48 +111,54 @@ namespace triangleswpf
             }
             return false;
         }
+        
+        // Contains calls to all of the triangle determining methods
         private string getTriangleType(float a, float b, float c)
         {
+            // Classify the triangle accordingly if valid
             if (IsValidTriangle(a, b, c))
             {
                 ResultSign.Source = new BitmapImage(new Uri(@"/assets/validsign.png", UriKind.Relative));
                 if (IsRightAngleTriangle(a, b, c))
                 {
-                    return "right-angle triangle";
+                    return "right-angle";
                 }
                 else if (IsEqualTriangle(a, b, c))
                 {
-                    return "equilateral triangle";
+                    return "equilateral";
                 }
                 else if (IsIsoTriangle(a, b, c))
                 {
-                    return "isosceles triangle";
+                    return "isosceles";
                 }
-                return "triangle";
+                return "valid";
             }
             else
             {
                 ResultSign.Source = new BitmapImage(new Uri(@"/assets/errorsign.png", UriKind.Relative));
-                return "invalid triangle";
+                return "invalid";
             }
         }
 
         public void generateResult(float a, float b, float c)
         {
-            RealResult.Text = getTriangleType(a,b,c);
-
-            /*if (validA && validB && validC)
+            // Display the 'type'
+            RealType.Text = getTriangleType(a,b,c);
+            
+            // Handle message for special cases
+            bool IsArticleForVowel = false;
+            string validTriangleStatement = "produce a valid " + getTriangleType(a, b, c);
+            if (RealType.Text == "invalid")
             {
+                IsArticleForVowel = true;
+            }
+            if (RealType.Text == "valid")
+            {
+                validTriangleStatement = "produce a " + getTriangleType(a, b, c);
+            }
 
-                if (checkTheorem(fltA, fltB, fltC))
-                {
-                    RealResult.Text = "These side lengths produce a valid right angle triangle";
-                }
-                else
-                {
-                    RealResult.Text = "Invalid right angle triangle";
-                }
-            }*/
+            // Display the 'result' using all statements above to generate proper statement
+            RealResult.Text = "These side lengths " + (IsArticleForVowel ? "do not produce a valid" : validTriangleStatement) + " triangle";
         }
     }
 }
