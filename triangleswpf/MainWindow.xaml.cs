@@ -20,73 +20,116 @@ namespace triangleswpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool modifiedA, modifiedB, modifiedC = false;
-        private string valA, valB, valC = "0";
+        //private bool validA, validB, validC = false;
+        private float valueA, valueB, valueC = 0;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void LengthC_Handler(object sender, TextChangedEventArgs e)
+        private float castStringToValue(string entry)
         {
-            valC = LengthC.Text;
-            modifiedC = true;
-            if (modifiedA && modifiedB)
+            bool valid = false;
+            float value = 0;
+            valid = float.TryParse(entry, out value);
+            if (valid && value > 0)
             {
-                generateResult(valA, valB, valC);
+                return value;
             }
+            return 0;
         }
 
-        private void LengthB_Handler(object sender, TextChangedEventArgs e)
+        private void TextChange_Handler(object sender, TextChangedEventArgs e)
         {
-            valB = LengthB.Text;
-            modifiedB = true;
-            if (modifiedA && modifiedC)
-            {
-                generateResult(valA, valB, valC);
-            }
-        }
+            valueA = castStringToValue(LengthA.Text);
+            valueB = castStringToValue(LengthB.Text);
+            valueC = castStringToValue(LengthC.Text);
 
+            Console.WriteLine("A: "+valueA);
+            Console.WriteLine("B: "+valueB);
+            Console.WriteLine("C: "+valueC);
 
-        private void LengthA_Handler(object sender, TextChangedEventArgs args)
-        {
-            valA = LengthA.Text;
-            modifiedA = true;
-            if (modifiedB && modifiedC)
+            if (valueA > 0 && valueB > 0 && valueC > 0)
             {
-                generateResult(valA, valB, valC);
-            }
-        }
-
-        public bool checkTheorem(float a, float b, float c)
-        {
-            if (a+b == c)
-            {
-                return true;
+                Console.WriteLine("all valid numbers");
+                generateResult(valueA, valueB, valueC);
+                //ResultSign
             }
             else
             {
-                return false;
+                Console.WriteLine("Input Error");
+                //ResultSign.Source = ;
+            }
+            //might want to validate here if the value is numeric and positive
+            //LengthA.Text = "";
+        }
+        private bool IsValidTriangle(float a, float b, float c)
+        {
+            if ((a + b > c) && (b + c > a) & (a + c > b))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsRightAngleTriangle(float a, float b, float c)
+        {
+            double [] asq = new double[3] { Math.Pow(a, 2), Math.Pow(b, 2), Math.Pow(c, 2) };
+            if (asq[0] + asq[1] == asq[2] || asq[0] + asq[2] == asq[1] || asq[1] + asq[2] == asq[0])
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool IsEqualTriangle(float a, float b, float c)
+        {
+            if (a == b && b == c)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool IsIsoTriangle(float a, float b, float c)
+        {
+            if (a == b || a == c || b == c)
+            {
+                return true;
+            }
+            return false;
+        }
+        private string getTriangleType(float a, float b, float c)
+        {
+            if (IsValidTriangle(a, b, c))
+            {
+                if (IsRightAngleTriangle(a, b, c))
+                {
+                    return "right-angle triangle";
+                }
+                else if (IsEqualTriangle(a, b, c))
+                {
+                    return "equilateral triangle";
+                }
+                else if (IsIsoTriangle(a, b, c))
+                {
+                    return "isosceles triangle";
+                }
+                return "triangle";
+            }
+            else
+            {
+                return "invalid triangle";
             }
         }
 
-        public void generateResult(string a, string b, string c)
+        public void generateResult(float a, float b, float c)
         {
-            float fltA, fltB, fltC = 0;
-            bool validA, validB, validC = false;
-            validA = float.TryParse(a, out fltA);
-            validB = float.TryParse(b, out fltB);
-            validC = float.TryParse(c, out fltC);
+            RealResult.Text = getTriangleType(a,b,c);
 
-            float squaredA, squaredB, squaredC;
-
-            if (validA && validB && validC)
+            /*if (validA && validB && validC)
             {
-                squaredA = (float) Math.Pow(fltA, 2.0);
-                squaredB = (float) Math.Pow(fltB, 2.0);
-                squaredC = (float) Math.Pow(fltC, 2.0);
 
-                if (checkTheorem(squaredA, squaredB, squaredC))
+                if (checkTheorem(fltA, fltB, fltC))
                 {
                     RealResult.Text = "These side lengths produce a valid right angle triangle";
                 }
@@ -94,16 +137,7 @@ namespace triangleswpf
                 {
                     RealResult.Text = "Invalid right angle triangle";
                 }
-            }
-            
-
-            //float ressy = (sideA / sideB);
-            //string str = ressy.ToString();
-            //MessageBox.Show(str);
-
-            //
+            }*/
         }
-
     }
-    
 }

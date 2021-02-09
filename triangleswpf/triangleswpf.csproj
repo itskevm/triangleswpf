@@ -107,5 +107,12 @@
     <Resource Include="assets\rawicon.png" />
     <Resource Include="assets\trilogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\errorsign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\validsign.png" />
+    <Resource Include="assets\warningsign.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
