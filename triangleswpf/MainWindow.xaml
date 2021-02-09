@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Triangles"
         Icon="pack://application:,,,./assets/tricon.ico"
-        Height="550" Width="500">
+        Height="550" Width="500" MinHeight="500" MinWidth="468" MaxHeight="700" MaxWidth="700">
     <Grid Background="#202020">
         <Border Margin="25 10" Padding="10" BorderBrush="#eee" BorderThickness="1">
             <StackPanel>
@@ -18,28 +18,27 @@
                 </Viewbox>
                 <TextBlock Text="Triangle Information" FontWeight="Bold" Foreground="#eee" Margin="0 20" FontFamily="Verdana" FontSize="16"/>
                 <TextBlock Text="Inputs" FontWeight="DemiBold" Foreground="#eee" Padding="10 0" FontSize="14"/>
-
                 <!-- Accepts user interaction -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="0.7*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="0.7*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 15" FontSize="15" Text="Side A length (m):" Foreground="#eee"/>
-                    <TextBox x:Name="LengthA" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="0" Margin="0 10" Padding="2 5" />
-                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 15" FontSize="15" Text="Side B length (m):" Foreground="#eee"/>
-                    <TextBox x:Name="LengthB" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="1" Margin="0 10" Padding="2 5"/>
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 15" FontSize="15" Text="Side C length (m):" Foreground="#eee"/>
-                    <TextBox x:Name="LengthC" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="2" Margin="0 10" Padding="2 5"/>
-                </Grid>
-                <Separator Margin="10 10 10 0" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 15" FontSize="15" Text="Side A length (m):" Foreground="#eee"/>
+                        <TextBox x:Name="LengthA" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="0" Margin="0 10" Padding="2 5" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 15" FontSize="15" Text="Side B length (m):" Foreground="#eee"/>
+                        <TextBox x:Name="LengthB" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="1" Margin="0 10" Padding="2 5"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 15" FontSize="15" Text="Side C length (m):" Foreground="#eee"/>
+                        <TextBox x:Name="LengthC" TextChanged="TextChange_Handler" Grid.Column="1" Grid.Row="2" Margin="0 10" Padding="2 5"/>
+                    </Grid>
+                    <Separator Margin="10 10 10 0" />
 
                 <!-- Displays results -->
                 <TextBlock Text="Results" FontWeight="DemiBold" Foreground="#eee" Padding="10 10 10 0" FontSize="14"/>
