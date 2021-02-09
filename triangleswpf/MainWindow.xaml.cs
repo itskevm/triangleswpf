@@ -57,8 +57,10 @@ namespace triangleswpf
             }
             else
             {
+                generateResult(0, 0, 0);
+                RealResult.Text = "Verify inputs";
                 Console.WriteLine("Input Error");
-                //ResultSign.Source = ;
+                ResultSign.Source = new BitmapImage(new Uri(@"/assets/warningsign.png", UriKind.Relative));
             }
             //might want to validate here if the value is numeric and positive
             //LengthA.Text = "";
@@ -102,6 +104,7 @@ namespace triangleswpf
         {
             if (IsValidTriangle(a, b, c))
             {
+                ResultSign.Source = new BitmapImage(new Uri(@"/assets/validsign.png", UriKind.Relative));
                 if (IsRightAngleTriangle(a, b, c))
                 {
                     return "right-angle triangle";
@@ -118,6 +121,7 @@ namespace triangleswpf
             }
             else
             {
+                ResultSign.Source = new BitmapImage(new Uri(@"/assets/errorsign.png", UriKind.Relative));
                 return "invalid triangle";
             }
         }
