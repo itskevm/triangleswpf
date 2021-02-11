@@ -160,21 +160,20 @@ namespace triangleswpf
         {
             // Display the 'type'
             RealType.Text = getTriangleType(a,b,c);
-            
-            // Handle message for special cases
-            bool IsArticleForVowel = false;
-            string validTriangleStatement = "produce a valid " + getTriangleType(a, b, c);
+
+            // Handle message cases
             if (RealType.Text == "invalid")
             {
-                IsArticleForVowel = true;
+                RealResult.Text = "These side lengths do not produce a valid triangle";
             }
-            if (RealType.Text == "valid")
+            else if (RealType.Text == "valid")
             {
-                validTriangleStatement = "produce a " + getTriangleType(a, b, c);
+                RealResult.Text = "These side lengths produce a valid triangle";
             }
-
-            // Display the 'result' using all statements above to generate proper statement
-            RealResult.Text = "These side lengths " + (IsArticleForVowel ? "do not produce a valid" : validTriangleStatement) + " triangle";
+            else
+            {
+                RealResult.Text = $"These side lengths produce a valid {RealType.Text} triangle";
+            }
         }
     }
 }
