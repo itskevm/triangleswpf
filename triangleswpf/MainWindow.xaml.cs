@@ -128,26 +128,35 @@ namespace triangleswpf
             return false;
         }
         
+        public string ClassifyValidTriangle(float a, float b, float c)
+        {
+            if (IsRightAngleTriangle(a, b, c))
+            {
+                return "right-angle";
+            }
+            else if (IsIsoTriangle(a, b, c))
+            {
+                if (IsEqualTriangle(a, b, c))
+                {
+                    return "equilateral and isosceles";
+                }
+                return "isosceles";
+            }
+            else if (IsEqualTriangle(a, b, c))
+            {
+                return "equilateral";
+            }
+            return "valid";
+        }
+
         // Contains calls to all of the triangle determining methods
         private string getTriangleType(float a, float b, float c)
         {
             // Classify the triangle accordingly if valid
-            if (IsValidTriangle(a, b, c))
+            if (IsValidTriangle(a,b,c))
             {
                 ResultSign.Source = new BitmapImage(new Uri(@"/assets/validsign.png", UriKind.Relative));
-                if (IsRightAngleTriangle(a, b, c))
-                {
-                    return "right-angle";
-                }
-                else if (IsEqualTriangle(a, b, c))
-                {
-                    return "equilateral";
-                }
-                else if (IsIsoTriangle(a, b, c))
-                {
-                    return "isosceles";
-                }
-                return "valid";
+                return ClassifyValidTriangle(a,b,c);
             }
             else
             {
